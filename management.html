@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Management Dashboard - ODDSOCEAN</title>
+  <link rel="stylesheet" href="dashboard.css">
+</head>
+<body>
+  <!-- Header -->
+  <header>
+    <h1>ODDSOCEAN Management Dashboard</h1>
+    <img src="OOCN.png" alt="Logo" class="logo">
+  </header>
+
+  <!-- Container -->
+  <div class="container">
+    <!-- Sidebar -->
+    <aside class="sidebar">
+      <button onclick="loadForm('news')">News</button>
+      <button onclick="loadForm('achievements')">Achievements</button>
+      <button onclick="loadForm('workdone')">Work Done</button>
+      <button onclick="loadForm('events')">Events Handled</button>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="main-content">
+      <h2 id="form-title">Choose an Option</h2>
+      <form id="dynamic-form">
+        <p>Select a category to load its content.</p>
+      </form>
+      <div id="preview"></div>
+      <div class="progress-container">
+        <div id="progress-bar"></div>
+      </div>
+    </main>
+  </div>
+
+  <!-- JS -->
+  <script>
+    function loadForm(type) {
+      let form = document.getElementById("dynamic-form");
+      let title = document.getElementById("form-title");
+      let preview = document.getElementById("preview");
+
+      preview.innerHTML = "";
+      form.innerHTML = "";
+
+      if (type === "workdone") {
+        title.innerText = "Work Done (Management)";
+        form.innerHTML = `
+          <label>Project / Campaign Title:</label>
+          <input type="text" required>
+          <label>Description:</label>
+          <textarea></textarea>
+          <label>Upload Sample (Report/Poster):</label>
+          <input type="file" id="fileUpload" accept="image/*,application/pdf">
+          <button type="submit">Save Work</button>
+        `;
+      }
+      else if (type === "achievements") {
+        title.innerText = "Achievements";
+        form.innerHTML = `
+          <label>Achievement Title:</label>
+          <input type="text" required>
+          <label>Year:</label>
+          <input type="number" required>
+          <textarea placeholder="Details..."></textarea>
+          <button type="submit">Submit Achievement</button>
+        `;
+      }
+      else if (type === "events") {
+        title.innerText = "Events / Teams Handled";
+        form.innerHTML = `
+          <label>Event/Team Name:</label>
+          <input type="text" required>
+          <label>Role/Responsibility:</label>
+          <input type="text" required>
+          <label>Upload Proof (Image/Report):</label>
+          <input type="file" id="fileUpload" accept="image/*,application/pdf">
+          <button type="submit">Save Event</button>
+        `;
+      }
+      else if (type === "news") {
+        title.innerText = "Org News";
+        form.innerHTML = `<div id="news-list">Loading news...</div>`;
+        fetchNews();
+      }
+
+      // File Preview
+      form.querySelectorAll("#fileUpload").forEach(input => {
+        input.addEventListener("change", function() {
+          preview.innerHTML = "";
+          const file = this.files[0];
+          if (file) {
+            const url = URL.createObjectURL(file);
+            if (file.type.startsWith("image")) {
+              preview.innerHTML = `<img src="${url}" style="max-width:300px; margin-top:10px;">`;
+            } else if (file.type === "application/pdf") {
+              preview.innerHTML = `<p>PDF Uploaded: ${file.name}</p>`;
+            }
+          }
+        });
+      });
+
+      // Progress Bar
+      form.addEventListener("submit", function(e) {
+        e.preventDefault();
+        let bar = document.getElementById("progress-bar");
+        bar.style.width = "100%";
+        bar.innerText = "Progress 100% - Saved!";
+      });
+    }
+
+    // Dummy News Fetch
+    function fetchNews() {
+      const newsContainer = document.getElementById("news-list");
+      newsContainer.innerHTML = `
+        <div class="news-item">
+          <h3>ODDSOCEAN Expands</h3>
+          <p>New management recruits joining to handle esports growth.</p>
+        </div>
+        <div class="news-item">
+          <h3>Event Organized</h3>
+          <p>Successfully hosted an inter-college esports event.</p>
+        </div>
+      `;
+    }
+  </script>
+</body>
+</html>

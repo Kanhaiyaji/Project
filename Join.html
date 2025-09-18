@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Join ODDSOCEAN</title>
+
+  <!-- Custom CSS -->
+  <link rel="stylesheet" href="join.css">
+
+  <!-- Google Fonts (Cursive for heading) -->
+  <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+</head>
+<body>
+  <div class="join-container">
+    <h1>Join <span>OddsOcean</span></h1>
+    <p class="lead">Choose your role and become part of the journey 🚀</p>
+
+    <form id="joinForm">
+      <div class="input-box">
+        <label for="role">Select Your Role</label>
+        <select name="role" id="role" required>
+          <option value="">-- Choose Role --</option>
+          <option value="esports">Esports Player</option>
+          <option value="cc">Content Creator</option>
+          <option value="management">Management Team</option>
+          <option value="video">Video Editor</option>
+          <option value="gfx">GFX / Thumbnail Editor</option>
+          <option value="sponsor">Investor / Sponsor</option>
+        </select>
+      </div>
+
+      <button type="submit" class="btn">Proceed</button>
+    </form>
+  </div>
+
+  <!-- JS -->
+  <script>
+    document.getElementById("joinForm").addEventListener("submit", function(e) {
+      e.preventDefault();
+      const role = document.getElementById("role").value;
+
+      if (role === "esports") {
+        window.location.href = "esports.html";
+      } else if (role === "cc") {
+        window.location.href = "cc.html";
+      } else if (role === "management") {
+        window.location.href = "management.html";
+      } else if (role === "video") {
+        window.location.href = "video-editor.html";
+      } else if (role === "gfx") {
+        window.location.href = "gfx.html";
+      } else if (role === "sponsor") {
+        window.location.href = "sponsor.html";
+      } else {
+        alert("Please select a role!");
+      }
+    });
+  </script>
+</body>
+</html>

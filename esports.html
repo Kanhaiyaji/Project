@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Join as Esports Player</title>
+  <link rel="stylesheet" href="role.css">
+</head>
+<body>
+  <div class="form-container">
+    <h1>Join as <span>Esports Player</span></h1>
+    <form id="esportsForm">
+      <div class="input-box">
+        <input type="text" id="ign" required>
+        <label>In-Game Name (IGN)</label>
+      </div>
+      <div class="input-box">
+        <select id="game" required>
+          <option value="">Select Game</option>
+          <option>BGMI</option>
+          <option>FreeFire</option>
+          <option>Scarfall</option>
+          <option>Clash of Clans</option>
+        </select>
+      </div>
+      <div class="input-box">
+        <input type="text" id="rank" required>
+        <label>Rank / Level</label>
+      </div>
+      <div class="input-box">
+        <textarea id="achievements" rows="4" placeholder="Achievements / Tournaments Played"></textarea>
+      </div>
+      <button type="submit" class="btn">Submit Application</button>
+    </form>
+  </div>
+
+  <!-- Redirect Script -->
+  <script>
+    document.getElementById("esportsForm").addEventListener("submit", function(e) {
+      e.preventDefault(); // stop default refresh
+
+      // ✅ Form values (optional check, tu chahe save bhi kar sakta hai backend me)
+      const ign = document.getElementById("ign").value;
+      const game = document.getElementById("game").value;
+      const rank = document.getElementById("rank").value;
+
+      if (ign && game && rank) {
+        // Redirect to dashboard page
+        window.location.href = "esports.html";
+      } else {
+        alert("Please fill all required fields!");
+      }
+    });
+  </script>
+</body>
+</html>

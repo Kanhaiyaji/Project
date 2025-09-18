@@ -1,0 +1,210 @@
+/* ==============================
+   ODDSOCEAN Dashboard CSS
+   Common for Esports, CC, Mgmt, Editors, GFX, Sponsors
+   ============================== */
+
+/* Reset */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+html, body {
+  height: 100%;
+  font-family: "Poppins", Arial, sans-serif;
+  color: #fff;
+  background: radial-gradient(circle at top, #0a0f0f, #050505);
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Header */
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: #111;
+  padding: 12px 28px;
+  border-bottom: 1px solid rgba(0,255,204,0.2);
+  box-shadow: 0 4px 20px rgba(0,255,204,0.1);
+}
+header h1 {
+  color: #00ffcc;
+  font-size: 1.2rem;
+  font-weight: 600;
+  letter-spacing: 1px;
+}
+header .logo {
+  height: 48px;
+}
+
+/* Layout Container */
+.container {
+  display: flex;
+  height: calc(100vh - 68px);
+}
+
+/* Sidebar */
+.sidebar {
+  width: 220px;
+  background: #111;
+  padding: 20px;
+  border-right: 1px solid rgba(0,255,204,0.1);
+  box-shadow: 4px 0 20px rgba(0,255,204,0.06);
+  overflow-y: auto;
+}
+.sidebar button {
+  display: block;
+  width: 100%;
+  padding: 12px;
+  margin-bottom: 12px;
+  border: none;
+  border-radius: 8px;
+  background: #1a1a1a;
+  color: #fff;
+  font-size: 0.95rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+.sidebar button:hover {
+  background: #00ffcc;
+  color: #000;
+  box-shadow: 0 4px 16px rgba(0,255,204,0.4);
+}
+
+/* Main Content */
+.main-content {
+  flex: 1;
+  padding: 28px;
+  overflow-y: auto;
+}
+.main-content h2 {
+  color: #00ffcc;
+  margin-bottom: 18px;
+  font-size: 1.2rem;
+}
+.main-content p {
+  color: #bbb;
+  margin-bottom: 12px;
+}
+
+/* Forms */
+form label {
+  display: block;
+  margin: 8px 0 4px;
+  font-size: 0.9rem;
+  color: #aee;
+}
+form input,
+form textarea,
+form select {
+  width: 100%;
+  padding: 12px;
+  margin-bottom: 14px;
+  border-radius: 8px;
+  border: none;
+  background: #1a1a1a;
+  color: #fff;
+  font-size: 0.95rem;
+  outline: none;
+  transition: all 0.3s ease;
+}
+form input:focus,
+form textarea:focus,
+form select:focus {
+  border: 1px solid #00ffcc;
+  box-shadow: 0 0 12px rgba(0,255,204,0.3);
+  transform: scale(1.01);
+}
+
+/* Submit Button */
+button[type="submit"],
+.btn {
+  display: inline-block;
+  padding: 12px 18px;
+  background: linear-gradient(90deg, #00ffcc, #00d1ff);
+  color: #000;
+  border: none;
+  border-radius: 10px;
+  font-weight: bold;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: 0.3s ease;
+}
+button[type="submit"]:hover,
+.btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(0,255,204,0.4);
+}
+button[type="submit"]:active,
+.btn:active {
+  transform: scale(0.98);
+}
+
+/* File Preview */
+#preview {
+  margin-top: 15px;
+}
+#preview img,
+#preview video {
+  max-width: 320px;
+  border-radius: 8px;
+  margin-top: 10px;
+  box-shadow: 0 0 15px rgba(0,255,204,0.25);
+}
+
+/* Progress Bar */
+.progress-container {
+  margin-top: 20px;
+  background: #1a1a1a;
+  border-radius: 8px;
+  height: 24px;
+  overflow: hidden;
+}
+#progress-bar {
+  height: 100%;
+  width: 0%;
+  background: #00ffcc;
+  color: #000;
+  font-size: 0.9rem;
+  font-weight: bold;
+  text-align: center;
+  line-height: 24px;
+  transition: width 1s ease;
+}
+
+/* News Cards */
+.news-item {
+  background: #111;
+  padding: 15px;
+  margin-bottom: 12px;
+  border-radius: 10px;
+  border: 1px solid rgba(0,255,204,0.12);
+  box-shadow: 0 0 10px rgba(0,255,204,0.15);
+}
+.news-item h3 {
+  color: #00ffcc;
+  margin-bottom: 6px;
+  font-size: 1.05rem;
+}
+.news-item p {
+  color: #ccc;
+  font-size: 0.9rem;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .container {
+    flex-direction: column;
+  }
+  .sidebar {
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    border-right: none;
+    border-bottom: 1px solid rgba(0,255,204,0.1);
+  }
+  .sidebar button {
+    flex: 1 1 calc(50% - 10px);
+  }
+}

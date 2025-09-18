@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>GFX / Thumbnail Editor Dashboard - ODDSOCEAN</title>
+  <link rel="stylesheet" href="dashboard.css">
+</head>
+<body>
+  <!-- Header -->
+  <header>
+    <h1>ODDSOCEAN GFX / Thumbnail Dashboard</h1>
+    <img src="OOCN.png" alt="Logo" class="logo">
+  </header>
+
+  <!-- Container -->
+  <div class="container">
+    <!-- Sidebar -->
+    <aside class="sidebar">
+      <button onclick="loadForm('news')">News</button>
+      <button onclick="loadForm('workdone')">Work Done</button>
+      <button onclick="loadForm('designs')">Upload Designs</button>
+      <button onclick="loadForm('portfolio')">Portfolio</button>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="main-content">
+      <h2 id="form-title">Choose an Option</h2>
+      <form id="dynamic-form">
+        <p>Select a category to load its content.</p>
+      </form>
+      <div id="preview"></div>
+      <div class="progress-container">
+        <div id="progress-bar"></div>
+      </div>
+    </main>
+  </div>
+
+  <!-- JS -->
+  <script>
+    function loadForm(type) {
+      let form = document.getElementById("dynamic-form");
+      let title = document.getElementById("form-title");
+      let preview = document.getElementById("preview");
+
+      preview.innerHTML = "";
+      form.innerHTML = "";
+
+      if (type === "workdone") {
+        title.innerText = "Work Done (GFX / Thumbnails)";
+        form.innerHTML = `
+          <label>Project Title:</label>
+          <input type="text" required>
+          <label>Description of Work:</label>
+          <textarea></textarea>
+          <button type="submit">Save Work</button>
+        `;
+      }
+      else if (type === "designs") {
+        title.innerText = "Upload Designs";
+        form.innerHTML = `
+          <label>Upload GFX / Thumbnail:</label>
+          <input type="file" id="fileUpload" accept="image/*">
+          <button type="submit">Upload Design</button>
+        `;
+      }
+      else if (type === "portfolio") {
+        title.innerText = "Portfolio Link";
+        form.innerHTML = `
+          <label>Portfolio / Drive / Behance Link:</label>
+          <input type="url" placeholder="https://yourportfolio.com" required>
+          <button type="submit">Save Portfolio</button>
+        `;
+      }
+      else if (type === "news") {
+        title.innerText = "Design News";
+        form.innerHTML = `<div id="news-list">Loading news...</div>`;
+        fetchNews();
+      }
+
+      // File Preview
+      form.querySelectorAll("#fileUpload").forEach(input => {
+        input.addEventListener("change", function() {
+          preview.innerHTML = "";
+          const file = this.files[0];
+          if (file) {
+            const url = URL.createObjectURL(file);
+            if (file.type.startsWith("image")) {
+              preview.innerHTML = `<img src="${url}" style="max-width:300px; margin-top:10px;">`;
+            }
+          }
+        });
+      });
+
+      // Progress Bar
+      form.addEventListener("submit", function(e) {
+        e.preventDefault();
+        let bar = document.getElementById("progress-bar");
+        bar.style.width = "100%";
+        bar.innerText = "Progress 100% - Saved!";
+      });
+    }
+
+    // Dummy News Fetch
+    function fetchNews() {
+      const newsContainer = document.getElementById("news-list");
+      newsContainer.innerHTML = `
+        <div class="news-item">
+          <h3>Thumbnail Trends 2025</h3>
+          <p>Neon gradients & bold fonts dominating esports GFX.</p>
+        </div>
+        <div class="news-item">
+          <h3>ODDSOCEAN Design Team Update</h3>
+          <p>New GFX editors joined to boost content quality.</p>
+        </div>
+      `;
+    }
+  </script>
+</body>
+</html>

@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Video Editor Dashboard - ODDSOCEAN</title>
+  <link rel="stylesheet" href="dashboard.css">
+</head>
+<body>
+  <!-- Header -->
+  <header>
+    <h1>ODDSOCEAN Video Editor Dashboard</h1>
+    <img src="OOCN.png" alt="Logo" class="logo">
+  </header>
+
+  <!-- Container -->
+  <div class="container">
+    <!-- Sidebar -->
+    <aside class="sidebar">
+      <button onclick="loadForm('news')">News</button>
+      <button onclick="loadForm('workdone')">Work Done</button>
+      <button onclick="loadForm('tools')">Tools Used</button>
+      <button onclick="loadForm('samples')">Upload Samples</button>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="main-content">
+      <h2 id="form-title">Choose an Option</h2>
+      <form id="dynamic-form">
+        <p>Select a category to load its content.</p>
+      </form>
+      <div id="preview"></div>
+      <div class="progress-container">
+        <div id="progress-bar"></div>
+      </div>
+    </main>
+  </div>
+
+  <!-- JS -->
+  <script>
+    function loadForm(type) {
+      let form = document.getElementById("dynamic-form");
+      let title = document.getElementById("form-title");
+      let preview = document.getElementById("preview");
+
+      preview.innerHTML = "";
+      form.innerHTML = "";
+
+      if (type === "workdone") {
+        title.innerText = "Work Done (Video Editing)";
+        form.innerHTML = `
+          <label>Project Title:</label>
+          <input type="text" required>
+          <label>Description of Work:</label>
+          <textarea></textarea>
+          <label>Portfolio Link (YouTube/Drive):</label>
+          <input type="url">
+          <button type="submit">Save Work</button>
+        `;
+      }
+      else if (type === "tools") {
+        title.innerText = "Tools Used";
+        form.innerHTML = `
+          <label>List Your Tools (e.g. Premiere Pro, After Effects):</label>
+          <input type="text" placeholder="Adobe Premiere, After Effects, Davinci Resolve" required>
+          <button type="submit">Save Tools</button>
+        `;
+      }
+      else if (type === "samples") {
+        title.innerText = "Upload Video Samples";
+        form.innerHTML = `
+          <label>Upload Your Work (Video File):</label>
+          <input type="file" id="fileUpload" accept="video/*">
+          <button type="submit">Upload Sample</button>
+        `;
+      }
+      else if (type === "news") {
+        title.innerText = "Editor News";
+        form.innerHTML = `<div id="news-list">Loading news...</div>`;
+        fetchNews();
+      }
+
+      // File Preview
+      form.querySelectorAll("#fileUpload").forEach(input => {
+        input.addEventListener("change", function() {
+          preview.innerHTML = "";
+          const file = this.files[0];
+          if (file) {
+            const url = URL.createObjectURL(file);
+            if (file.type.startsWith("video")) {
+              preview.innerHTML = `<video src="${url}" controls style="max-width:300px; margin-top:10px;"></video>`;
+            }
+          }
+        });
+      });
+
+      // Progress Bar
+      form.addEventListener("submit", function(e) {
+        e.preventDefault();
+        let bar = document.getElementById("progress-bar");
+        bar.style.width = "100%";
+        bar.innerText = "Progress 100% - Saved!";
+      });
+    }
+
+    // Dummy News Fetch
+    function fetchNews() {
+      const newsContainer = document.getElementById("news-list");
+      newsContainer.innerHTML = `
+        <div class="news-item">
+          <h3>New Editing Tools</h3>
+          <p>Adobe launches AI-powered editing features.</p>
+        </div>
+        <div class="news-item">
+          <h3>ODDSOCEAN Montage Released</h3>
+          <p>Editors drop a fresh esports highlights reel.</p>
+        </div>
+      `;
+    }
+  </script>
+</body>
+</html>
